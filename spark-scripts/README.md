@@ -14,3 +14,8 @@ This repository contains simple spark scripts
 ## Reference
 - [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/learn/v4/t/lecture/5364972?start=0)
 - [Movielens Datasets](https://grouplens.org/datasets/movielens/)
+
+
+## Notes
+- If we have data that is very large and can't fit in memory + we don't want to send that data across network more than once we can use broadcast variables
+  - We can take that chunck of data and will explicitey send it to all the nodes of the cluster. So that its there and ready when even anone needs it

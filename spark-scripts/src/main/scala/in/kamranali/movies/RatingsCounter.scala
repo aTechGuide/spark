@@ -1,5 +1,6 @@
 package in.kamranali.movies
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
 
 object RatingsCounter {
@@ -7,13 +8,15 @@ object RatingsCounter {
 
   def main(args: Array[String]): Unit = {
 
+    Logger.getLogger("org").setLevel(Level.ERROR)
+
     // Create Spark context using every core of local machine
     // Remember: SparkContext object is used to create our RDDs
     val sc = new SparkContext("local[*]", "RatingCounterApp")
 
     // Read the data file
     // Loading data into RDD constant lines
-    val lines = sc.textFile("./src/main/resources/u.data")
+    val lines = sc.textFile("./src/main/resources/moviedata/u.data")
 
     // Convert each line to String -> Split by Tabs -> Extract third field
     // Data format (userID, movieID, rating, timestamp)
