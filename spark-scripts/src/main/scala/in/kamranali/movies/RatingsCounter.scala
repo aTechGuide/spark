@@ -1,4 +1,4 @@
-package in.kamranali
+package in.kamranali.movies
 
 import org.apache.spark.SparkContext
 

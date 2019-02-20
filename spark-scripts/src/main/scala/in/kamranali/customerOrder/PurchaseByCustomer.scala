@@ -1,4 +1,4 @@
-package in.kamranali
+package in.kamranali.customerOrder
 
 import org.apache.spark.SparkContext
 
