@@ -6,6 +6,8 @@ scalaVersion := "2.11.12"
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.3.1" % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.3.1" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-mllib" % "2.3.1" % "provided"
+libraryDependencies += "com.github.fommil.netlib" % "all" % "1.1.2"
 libraryDependencies += "org.projectlombok" % "lombok" % "1.16.16"
 libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.11.2"
 libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % "2.11.2"
