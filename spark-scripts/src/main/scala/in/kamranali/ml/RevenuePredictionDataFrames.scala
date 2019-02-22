@@ -5,7 +5,7 @@ import org.apache.spark.ml.regression.LinearRegression
 import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.sql.SparkSession
 
-object RevenuePrediction {
+object RevenuePredictionDataFrames {
 
   def main(args: Array[String]): Unit = {
 
@@ -46,7 +46,7 @@ object RevenuePrediction {
     // This will add a prediction column to test data
     val fullPrecidtions = model.transform(testDF).cache()
 
-    val predictionAndLabel = fullPrecidtions.select("preduction", "label").rdd.map(x => (x.getDouble(0), x.getDouble(1)))
+    val predictionAndLabel = fullPrecidtions.select("prediction", "label").rdd.map(x => (x.getDouble(0), x.getDouble(1)))
 
     // Printing predicted and actual values for each data point
     for (prediction <- predictionAndLabel) {
