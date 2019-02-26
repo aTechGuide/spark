@@ -13,7 +13,7 @@ This repository contains simple spark scripts
   
   
 ## Reference
-- [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/learn/v4/t/lecture/5364972?start=0)
+- [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/)
 - [Movielens Datasets](https://grouplens.org/datasets/movielens/)
 - [Salary Data from Superdatascience Dataset](https://www.superdatascience.com/machine-learning/)
 
