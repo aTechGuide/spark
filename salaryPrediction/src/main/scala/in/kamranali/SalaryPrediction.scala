@@ -11,12 +11,12 @@ object SalaryPrediction {
 
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-    val spark = SparkSession.builder.appName("SalaryPredictionDF").master("local[*]").getOrCreate()
+    // Spark Session Interface in spark 2.0
+    val spark = SparkSession.builder
+      .appName("SalaryPredictionDF")
+      .master("local[*]") // using all cores of CPU
+      .getOrCreate()
 
-    /*
-    This reads data in x,y. where x = "label" we want to predict (First column of our data) and y = "feature" (second column) which we can use to predict the label.
-    We can have more than one feature which is why vector is required.
-     */
     val inputLines = spark.sparkContext.textFile("./src/main/resources/salary_data.txt")
     val data = inputLines.map(_.split(",")).map( x => (x(1).toDouble, Vectors.dense(x(0).toDouble)))
 
@@ -46,7 +46,7 @@ object SalaryPrediction {
     // This will add a prediction column to test data
     val fullPrecidtions = model.transform(testDF).cache()
 
-    val predictionAndLabel = fullPrecidtions.select("prediction", "label").rdd.map(x => (x.getDouble(0), x.getDouble(1)))
+    val predictionAndLabel = fullPrecidtions.select("prediction", "label").rdd.map(x => (x.getDouble(0).round, x.getDouble(1).round))
 
     // Printing predicted and actual values for each data point
     for (prediction <- predictionAndLabel) {
