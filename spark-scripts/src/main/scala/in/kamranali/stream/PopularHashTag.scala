@@ -4,6 +4,7 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.streaming.twitter.TwitterUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
+// DSteam is a continuous series of RDDs and each RDD contains data from certain interval
 object PopularHashTag {
 
   def setUpTwitter(): Unit = {
