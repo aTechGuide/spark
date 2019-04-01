@@ -1,6 +1,6 @@
 ## Salary Prediction
 
-Predicting Salary of an employ using Spark MLLib.
+Predicting Salary of an employ using Spark 2.0 DataFrames.
 
 ### Commands
 - To build Jar, Run `sbt assembly`
@@ -9,5 +9,6 @@ Predicting Salary of an employ using Spark MLLib.
   
   
 ## Reference
+<<<<<<< HEAD
 - [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/)
 - [Salary Data from Superdatascience Dataset](https://www.superdatascience.com/machine-learning/ )
