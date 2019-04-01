@@ -9,6 +9,5 @@ Predicting Salary of an employ using Spark 2.0 DataFrames.
   
   
 ## Reference
-<<<<<<< HEAD
 - [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/)
 - [Salary Data from Superdatascience Dataset](https://www.superdatascience.com/machine-learning/ )
