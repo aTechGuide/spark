@@ -2,7 +2,9 @@ package in.kamranali.customerOrder
 
 import org.apache.spark.SparkContext
 
-// Find Amount spent by Each customer
+/*
+Find Total Amount spent by Each customer in sorted order
+ */
 object PurchaseByCustomer {
 
   def main(args: Array[String]): Unit = {

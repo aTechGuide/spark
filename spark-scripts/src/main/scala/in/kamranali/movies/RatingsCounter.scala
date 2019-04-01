@@ -3,6 +3,10 @@ package in.kamranali.movies
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
 
+/*
+Find sorted count for each rating.
+Given Data format (userID, movieID, rating, timestamp)
+ */
 object RatingsCounter {
 
 
