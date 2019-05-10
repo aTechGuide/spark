@@ -1,4 +1,4 @@
-package in.kamranali.movies
+package in.kamranali.basics
 
 import java.nio.charset.CodingErrorAction
 
@@ -15,12 +15,13 @@ object PopularMovies {
     codec.onMalformedInput(CodingErrorAction.REPLACE)
     codec.onUnmappableCharacter(CodingErrorAction.REPLACE)
 
+    // Map of MovieID and Movie Name
     var movieNames :Map[Int,String] = Map()
 
-    var lines = Source.fromFile("./src/main/resources/moviedata/u.item").getLines()
+    val lines = Source.fromFile("./src/main/resources/moviedata/u.item").getLines()
 
     for (line <- lines) {
-      var fields = line.split('|')
+      val fields = line.split('|')
       if (fields.length > 1) {
         movieNames += (fields(0).toInt -> fields(1))
       }
@@ -44,13 +45,13 @@ object PopularMovies {
     val lines = sc.textFile("./src/main/resources/moviedata/u.data")
 
     // Mapping to (movieID, 1) tuple
-    var movies = lines.map(x => (x.split("\t")(1).toInt, 1))
+    val movies = lines.map(x => (x.split("\t")(1).toInt, 1))
 
-    var movieCounts = movies.reduceByKey((x,y) => x+ y)
+    val movieCounts = movies.reduceByKey((x,y) => x+ y)
 
-    var flippedSortedMovies = movieCounts.map(x => (x._2, x._1)).sortByKey()
+    val flippedSortedMovies = movieCounts.map(x => (x._2, x._1)).sortByKey()
 
-    var flippedSortedMoviesWithNames = flippedSortedMovies.map(x => (nameDict.value.get(x._2) , x._1 ))
+    val flippedSortedMoviesWithNames = flippedSortedMovies.map(x => (nameDict.value.get(x._2) , x._1 ))
 
     flippedSortedMoviesWithNames.collect().foreach(println)
 

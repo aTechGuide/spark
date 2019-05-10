@@ -1,6 +1,11 @@
-package in.kamranali.fakeFriends
+package in.kamranali.dataframe
 
-import in.kamranali.fakeFriends.SparkSQL.mapper
+/*
+This script converts raw data into Person Class to apply Schema
+
+Using Spark Datasets we can run handy operations like select(), filter(), groupBy() etc
+
+ */
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
@@ -24,12 +29,16 @@ object DataFrames {
     val spark = SparkSession.builder.appName("SparkSQL").master("local[*]").getOrCreate()
 
     // Loading Unstructured data
-    val lines = spark.sparkContext.textFile("./src/main/resources/fakefriends/fakefriends.csv")
+    val friends = spark.sparkContext.textFile("./src/main/resources/fakefriends/fakefriends.csv")
+
+    // Applying Schema to raw data
+    val friendsSchema = friends.map(mapper)
 
     // Before converting a Structured RDD into a dataset do following import
     import spark.implicits._
 
-    val people = lines.map(mapper).toDS().cache()
+    // Converting RDD -> DataSet
+    val people = friendsSchema.toDS().cache()
 
     println("Printing Inferred Schema")
     people.printSchema()

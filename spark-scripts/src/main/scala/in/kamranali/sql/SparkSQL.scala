@@ -1,4 +1,4 @@
-package in.kamranali.fakeFriends
+package in.kamranali.sql
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
@@ -36,6 +36,10 @@ object SparkSQL {
 
     schemaPeople.printSchema()
 
+    /*
+    Main SQL Thing begins here
+     */
+
     // Converting contents of DataSet into a SQL table with name People
     schemaPeople.createOrReplaceTempView("people")
 
@@ -50,5 +54,3 @@ object SparkSQL {
   }
 
 }
-
-

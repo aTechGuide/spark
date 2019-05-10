@@ -10,14 +10,6 @@ This repository contains simple spark scripts
   - `spark-submit --class=in.kamranali.movies.RatingsCounter target/scala-2.11/SparkScripts-assembly-0.1.jar`
   - `spark-submit --class=in.kamranali.customerOrder.PurchaseByCustomer  target/scala-2.11/SparkScripts-assembly-0.1.jar`
   - `spark-submit --class=in.kamranali.movies.MovieSimilarities target/scala-2.11/SparkScripts-assembly-0.1.jar 50`
-  
-  
-## Reference
-- [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/)
-- [Movielens Datasets](https://grouplens.org/datasets/movielens/)
-- [Salary Data from Superdatascience Dataset](https://www.superdatascience.com/machine-learning/)
-- [Edureka Top apache Spark Questions](https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/)
-
 
 ## Notes
 - **Broadcast Variables** If we have data that is very large and can't fit in memory + we don't want to send that data across network more than once we can use broadcast variables
@@ -30,3 +22,10 @@ This repository contains simple spark scripts
   - *Sliding Interval*  The duration at which the windowed operation is performed
 - **Item Based Collaborative Filtering**
   - For same pair of movies, if they got similar ratings from many users we say these movies are related to each other
+  
+## Reference
+- [Apache spark with scala hands on with big data](https://www.udemy.com/apache-spark-with-scala-hands-on-with-big-data/)
+- [Movielens Datasets](https://grouplens.org/datasets/movielens/)
+- [Salary Data from Superdatascience Dataset](https://www.superdatascience.com/machine-learning/)
+- [Edureka Top apache Spark Questions](https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/)
+  
