@@ -106,3 +106,4 @@ venv.bak/
 .DS_Store
 
 *.idea/
+Spark-scripts/metastore_db/*

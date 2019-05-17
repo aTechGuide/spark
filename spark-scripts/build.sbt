@@ -17,4 +17,7 @@ libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.4"
 libraryDependencies += "org.apache.bahir" %% "spark-streaming-twitter" % "2.3.2"
 
 
-
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
