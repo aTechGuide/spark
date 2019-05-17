@@ -7,8 +7,8 @@ This repository contains simple spark scripts
 - To build Jar, Run `sbt assembly`
 - To view content of Jar file, `jar tf target/scala-2.11/MovieRating-assembly-1.0.jar`
 - To Run Jar file,
-  - `spark-submit --class=in.kamranali.movies.RatingsCounter target/scala-2.11/SparkScripts-assembly-0.1.jar`
-  - `spark-submit --class=in.kamranali.customerOrder.PurchaseByCustomer  target/scala-2.11/SparkScripts-assembly-0.1.jar`
+  - `spark-submit --class=in.kamranali.basics.RatingsCounter target/scala-2.11/SparkScripts-assembly-0.1.jar`
+  - `spark-submit --class=in.kamranali.basics.PurchaseByCustomer  target/scala-2.11/SparkScripts-assembly-0.1.jar`
   - `spark-submit --class=in.kamranali.movies.MovieSimilarities target/scala-2.11/SparkScripts-assembly-0.1.jar 50`
 
 ## Notes
