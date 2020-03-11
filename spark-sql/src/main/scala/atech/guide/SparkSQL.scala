@@ -1,6 +1,6 @@
 package atech.guide
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Dataset, SparkSession}
 
 
 object SparkSQL {
@@ -11,9 +11,7 @@ object SparkSQL {
 
     val fields = line.split(',')
 
-    val person = Person(fields(0).toInt, fields(1), fields(2).toInt, fields(3).toInt)
-
-    return person
+    Person(fields(0).toInt, fields(1), fields(2).toInt, fields(3).toInt)
   }
 
   def main(args: Array[String]): Unit = {
@@ -24,32 +22,28 @@ object SparkSQL {
     // Loading Unstructured data
     val lines = spark.sparkContext.textFile("src/main/resources/fakefriends/fakefriends.csv")
 
-    // Converting it into Strutured Data
+    // Converting it into Structured Data
     val people = lines.map(mapper)
 
     // Before converting a Structured RDD into a dataset do following import
     import spark.implicits._
 
     // Getting a dataset
-    val schemaPeople = people.toDS()
+    val schemaPeople: Dataset[Person] = people.toDS()
 
-    schemaPeople.printSchema()
-
-    /*
-    Main SQL Thing begins here
-     */
-
+    // 1
+    // After registering a DataFrame as a table we can run SQL queries
     // Converting contents of DataSet into a SQL table with name People
     schemaPeople.createOrReplaceTempView("people")
-
-    // After registering a DataFrame as a table we can run SQL queries
     val teenagers = spark.sql("SELECT * FROM people WHERE age >=13 AND age <=19")
+    println(teenagers.count())
 
-    val results = teenagers.collect()
+    // 2 Doing without SQL
+    val count = schemaPeople.filter($"age" >= 13 && $"age" <= 19).count()
+    println(s"Count = $count")
 
-    results.foreach(println)
-
-    spark.stop()
+    // 3
+    schemaPeople.filter(_.age >= 13).filter(_.age <= 19).count()
   }
 
 }
