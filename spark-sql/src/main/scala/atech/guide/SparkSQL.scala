@@ -20,7 +20,7 @@ object SparkSQL {
     spark.sparkContext.setLogLevel("ERROR")
 
     // Loading Unstructured data
-    val lines = spark.sparkContext.textFile("src/main/resources/fakefriends/fakefriends.csv")
+    val lines = spark.sparkContext.textFile("src/main/resources/data/fakefriends/fakefriends.csv")
 
     // Converting it into Structured Data
     val people = lines.map(mapper)

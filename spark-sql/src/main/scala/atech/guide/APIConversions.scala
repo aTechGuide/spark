@@ -5,14 +5,14 @@ import org.apache.spark.sql.SparkSession
 
 object APIConversions {
 
-  def rddToDF(stringRDD: RDD[String], spark: SparkSession) = {
+  private def rddToDF(stringRDD: RDD[String], spark: SparkSession) = {
 
     import spark.implicits._
 
     stringRDD.toDF("Strings")
   }
 
-  def rddToDS(stringRDD: RDD[String], spark: SparkSession) = {
+  private def rddToDS(stringRDD: RDD[String], spark: SparkSession) = {
 
     // We need implicits for encoders
     import spark.implicits._
@@ -32,6 +32,15 @@ object APIConversions {
 
     val sc = spark.sparkContext
 
+    /*
+      RDD does NOT have
+      - select
+      - join
+      - show
+      - explain
+      - where
+      - createOrReplaceGlobalTempView
+     */
     val stringRDD: RDD[String] = sc.parallelize(Seq("Kamran", "Ali", "nit"))
 
 
