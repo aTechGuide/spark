@@ -5,6 +5,7 @@ version := "0.1"
 scalaVersion := "2.12.10"
 
 val sparkVersion = "3.0.0-preview"
+val log4jVersion = "2.4.1"
 // val vegasVersion = "0.3.11"
 val postgresVersion = "42.2.2"
 
@@ -20,8 +21,8 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql" % sparkVersion,
 
   // logging
-  "org.apache.logging.log4j" % "log4j-api" % "2.4.1",
-  "org.apache.logging.log4j" % "log4j-core" % "2.4.1",
+  "org.apache.logging.log4j" % "log4j-api" % log4jVersion,
+  "org.apache.logging.log4j" % "log4j-core" % log4jVersion,
 
   // postgres for DB connectivity
   "org.postgresql" % "postgresql" % postgresVersion

@@ -4,8 +4,10 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{DoubleType, LongType, StringType, StructField, StructType}
 
 /**
-  * Dataframe -> Distributed collection of rows confirming to a schema
-  */
+ * Dataframe -> Distributed collection of rows confirming to a schema
+ *
+ * - Schema
+ */
 object DataframeBasics extends App {
 
   val spark = SparkSession
@@ -21,7 +23,7 @@ object DataframeBasics extends App {
 
   // data.show()
 
-  /*
+  /**
     schema
    */
 
@@ -48,7 +50,7 @@ object DataframeBasics extends App {
     .load("src/main/resources/data/cars.json")
 
   // Create rows by hand
-  val myRow = Row("buick skylark 320",15.0,8L,350.0,165L,3693L,11.5,"1970-01-01","USA"),
+  val myRow = Row("buick skylark 320",15.0,8L,350.0,165L,3693L,11.5,"1970-01-01","USA")
 
   // Create DF from Tuples
   val cars = Seq(
@@ -60,7 +62,7 @@ object DataframeBasics extends App {
 
   /*
     Note:
-    - Schema are only applicable to Dataframes not to rows
+    - Schema is only applicable to Data frame not to rows
     - Rows = Unstructured data
 
     Spark Types:
