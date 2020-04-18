@@ -10,13 +10,13 @@ import org.apache.spark.sql.types.{DoubleType, LongType, StringType, StructField
  */
 object DataframeBasics extends App {
 
-  val spark = SparkSession
+  private val spark = SparkSession
     .builder()
     .appName(getClass.getSimpleName)
     .master("local[2]")
     .getOrCreate()
 
-  val dataCar1 = spark.read
+  private val dataCar1 = spark.read
     .format("json")
     .option("inferSchema", "true")
     .load("src/main/resources/data/cars.json")
@@ -28,10 +28,10 @@ object DataframeBasics extends App {
    */
 
   // Option 1 [Obtain a schema]
-  val carsSchemaFromDF = dataCar1.schema
+  private val carsSchemaFromDF = dataCar1.schema
 
   // Option 2 [Create a schema manually]
-  val carsSchema = StructType(Array(
+  private val carsSchema = StructType(Array(
     StructField("Name", StringType),
     StructField("Miles_per_Gallon", DoubleType),
     StructField("Cylinders", LongType),
