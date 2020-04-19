@@ -148,7 +148,7 @@ object ColumnsAndExpressions extends App {
     col("Title"),
     col("US_Gross"),
     col("Worldwide_Gross"),
-    col("US_DVD_SAles"),
+    col("US_DVD_Sales"),
     (col("US_Gross") + col("Worldwide_Gross")).as("Total_Gross")
   )
 

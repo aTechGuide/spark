@@ -11,6 +11,8 @@ object Aggregations extends App {
     .master("local[2]")
     .getOrCreate()
 
+  spark.sparkContext.setLogLevel("ERROR")
+
 
   val moviesDF = spark.read
     .option("inferSchema", "true")
