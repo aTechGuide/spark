@@ -10,5 +10,8 @@ Spark-scripts/metastore_db/*
 Spark-scripts/src/main/main.iml
 
 # Spark SQL
-Spark-sql/src/main/main.iml
-Spark-sql/output
+spark-sql/src/main/main.iml
+spark-sql/output
+spark-sql/metastore_db/*
+spark-sql/spark-warehouse/*
+spark-sql/derby.log
