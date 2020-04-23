@@ -15,3 +15,4 @@ spark-sql/output
 spark-sql/metastore_db/*
 spark-sql/spark-warehouse/*
 spark-sql/derby.log
+spark-sql/src/main/resources/warehouse
