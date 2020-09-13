@@ -1,4 +1,7 @@
-FROM spydernaz/spark-base:latest
+# This assumes spark-base was built first.
+# Usually we'd run the build-images.sh script which builds spark-base
+
+FROM spark-base:latest
 
 COPY start-master.sh /
 

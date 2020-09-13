@@ -18,8 +18,10 @@ object DeployCluster {
       System.exit(1)
     }
 
-    val spark = SparkSession
-      .builder()
+    val spark = SparkSession.builder()
+      .appName("Test Deploy App")
+      // method 1
+      .config("spark.executor.memory", "1g")
       .getOrCreate()
 
     // spark.sparkContext.setLogLevel("ERROR")
@@ -37,12 +39,19 @@ object DeployCluster {
       .where(col("Major_Genre") === "Comedy" and col("IMDB_Rating") > 6.5)
       .orderBy(col("Rating").desc_nulls_last)
 
+    // method 2
+    spark.conf.set("spark.executor.memory", "1g") //<- Illegal: This is NOT going to be allowed.
+    // As some conf are not available to set while application is running
+
     goodComediesDF.show
 
     goodComediesDF.write
       .mode(SaveMode.Overwrite)
       .format("json")
       .save(args(1))
+
+    // method 3
+    // Passing Configurations directly into Spark Submit
 
   }
 
@@ -75,6 +84,26 @@ object DeployCluster {
   *     --deploy-mode client \
   *     --verbose \
   *     --supervise \
+  *
+  * Actual Command
+  *
+  * /spark/bin/spark-submit \
+  *   --class atech.guide.deploy.DeployCluster \
+  *   --master spark://b5ac6c87a0d4:7077 \
+  *   --deploy-mode client \
+  *   --verbose \
+  *   --supervise \
+  *   /opt/spark-apps/spark-sql.jar /opt/spark-data/movies.json /opt/spark-data/goodComedies.json
+  *
+  * Command with configurations
+  * /spark/bin/spark-submit \
+  *   --class atech.guide.deploy.DeployCluster \
+  *   --master spark://b5ac6c87a0d4:7077 \
+  *   --deploy-mode client \
+  *   --conf spark.executor.memory 1g \
+  *   --verbose \
+  *   --supervise \
+  *   /opt/spark-apps/spark-sql.jar /opt/spark-data/movies.json /opt/spark-data/goodComedies.json
   **/
 
 }

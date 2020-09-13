@@ -1,20 +1,18 @@
 FROM openjdk:8u212-b04-jdk-stretch
-LABEL author="Nathaniel Vala" email="nathanielvala@hotmail.com"
+LABEL author="Daniel Ciocirlan" email="daniel@rockthejvm.com"
 LABEL version="0.2"
 
 ENV DAEMON_RUN=true
-ENV SPARK_VERSION=2.4.5
+ENV SPARK_VERSION=3.0.0
 ENV HADOOP_VERSION=2.7
 ENV SCALA_VERSION=2.12.4
 ENV SCALA_HOME=/usr/share/scala
 ENV SPARK_HOME=/spark
 
 
-RUN apt-get update && apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates jq
+RUN apt-get update && apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates jq dbus-x11
+RUN echo exit 0 > /usr/sbin/policy-rc.d
 
-#     apt update && apt -y upgrade \
-#     apt install -y wget ca-certificates && \
-#     apt install -y curl bash jq && \
 RUN cd "/tmp" && \
     wget --no-verbose "https://downloads.typesafe.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.tgz" && \
     tar xzf "scala-${SCALA_VERSION}.tgz" && \
@@ -23,20 +21,6 @@ RUN cd "/tmp" && \
     mv "/tmp/scala-${SCALA_VERSION}/bin" "/tmp/scala-${SCALA_VERSION}/lib" "${SCALA_HOME}" && \
     ln -s "${SCALA_HOME}/bin/"* "/usr/bin/" && \
     rm -rf "/tmp/"*
-
-
-# RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
-#     apk add --no-cache bash curl jq && \
-#     cd "/tmp" && \
-#     wget --no-verbose "https://downloads.typesafe.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.tgz" && \
-#     tar xzf "scala-${SCALA_VERSION}.tgz" && \
-#     mkdir "${SCALA_HOME}" && \
-#     rm "/tmp/scala-${SCALA_VERSION}/bin/"*.bat && \
-#     mv "/tmp/scala-${SCALA_VERSION}/bin" "/tmp/scala-${SCALA_VERSION}/lib" "${SCALA_HOME}" && \
-#     ln -s "${SCALA_HOME}/bin/"* "/usr/bin/" && \
-#     apk del .build-dependencies && \
-#     rm -rf "/tmp/"*
-
 
 # Add Dependencies for PySpark
 RUN apt-get install -y python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas python3-simpy
