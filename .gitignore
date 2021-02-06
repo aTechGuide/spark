@@ -12,6 +12,7 @@ Spark-scripts/src/main/main.iml
 # Spark SQL
 spark-sql/src/main/main.iml
 spark-sql/output
+spark-sql/out/*
 spark-sql/metastore_db/*
 spark-sql/spark-warehouse/*
 spark-sql/derby.log

@@ -1,6 +1,6 @@
 package atech.guide.concepts
 
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.{Column, DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 /**
@@ -18,7 +18,7 @@ object Joins extends App {
 
   spark.sparkContext.setLogLevel("ERROR")
 
-  /**
+  /*
     * +--------------------+---+------+------------+
     * |          guitarType| id|  make|       model|
     * +--------------------+---+------+------------+
@@ -33,7 +33,7 @@ object Joins extends App {
     .option("inferSchema", "true")
     .json("src/main/resources/data/guitars.json")
 
-  /**
+  /*
     * +----+-------+---+------------+
     * |band|guitars| id|        name|
     * +----+-------+---+------------+
@@ -47,7 +47,7 @@ object Joins extends App {
     .option("inferSchema", "true")
     .json("src/main/resources/data/guitarPlayers.json")
 
-  /**
+  /*
     * +-----------+---+------------+----+
     * |   hometown| id|        name|year|
     * +-----------+---+------------+----+
@@ -63,8 +63,11 @@ object Joins extends App {
 
   // Joins
 
-  // INNER JOIN
   /**
+    * INNER JOIN
+    */
+
+  /*
     * +----+-------+---+------------+-----------+---+------------+----+
     * |band|guitars| id|        name|   hometown| id|        name|year|
     * +----+-------+---+------------+-----------+---+------------+----+
@@ -74,12 +77,15 @@ object Joins extends App {
     * +----+-------+---+------------+-----------+---+------------+----+
     */
 
-  val joinCondition = guitaristDF.col("band") === bandsDF.col("id")
+  val joinCondition: Column = guitaristDF.col("band") === bandsDF.col("id")
   val guitaristsBandsDF = guitaristDF.join(bandsDF, joinCondition, "inner")
 
 
   /**
     * OUTER JOIN - LEFT Outer JOIN
+    */
+  /*
+    *
     * Everything in INNER Join + All the rows in the LEFT table, with nulls where the data is missing
     *
     * +----+-------+---+------------+-----------+----+------------+----+
@@ -96,6 +102,9 @@ object Joins extends App {
 
   /**
     * OUTER JOIN - RIGHT Outer JOIN
+    */
+  /*
+    *
     * Everything in INNER Join + All the rows in the RIGHT table, with nulls where the data is missing
     *
     * +----+-------+----+------------+-----------+---+------------+----+
@@ -112,7 +121,12 @@ object Joins extends App {
 
   /**
     * OUTER JOIN
+    */
+  /*
+    *
     * Everything in INNER Join + All the rows in BOTH tables, with nulls where the data is missing
+    *
+    * CAREFUL with outer joins with non-unique keys
     *
     * +----+-------+----+------------+-----------+----+------------+----+
     * |band|guitars|  id|        name|   hometown|  id|        name|year|
@@ -128,8 +142,14 @@ object Joins extends App {
   guitaristDF.join(bandsDF, joinCondition, "outer")
 
   /**
-    * SEMI JOIN: everything in the left DF for which there is a row in the right DF satisfying the condition
+    * SEMI JOIN
+    */
+
+  /*
+    * Everything in the left DF for which there is a row in the right DF satisfying the condition
     * Everything in INNER Join - Data from RIGHT Dataframe
+    *
+    * Essentially a filter
     *
     * +----+-------+---+------------+
     * |band|guitars| id|        name|
@@ -142,7 +162,10 @@ object Joins extends App {
   guitaristDF.join(bandsDF, joinCondition, "left_semi")
 
   /**
-    * ANTI JOIN: everything in the left DF for which there is NO row in the right DF satisfying the condition
+    * ANTI JOIN
+    */
+  /*
+    * Everything in the left DF for which there is NO row in the right DF satisfying the condition
     * Keeps the data in Left Dataframe for which there is no row in Right dataframe satisfying the join condition
     *
     * +----+-------+---+------------+
